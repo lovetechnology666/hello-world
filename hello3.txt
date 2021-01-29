@@ -1,0 +1,6 @@
+#include  <stdio.h>
+int main()
+{
+  printf("fighting！");
+  return 0;
+}
