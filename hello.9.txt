@@ -1,0 +1,13 @@
+#define  _CRT_SECURE_NO_WARNINGS
+#include  <stdio.h>
+int main()
+{
+	int a = 0;
+	printf("要好好学习吗(1/0)");
+	scanf("%d\n", &a);
+	if (a == 1)
+		printf("考研西北工业大学\n");
+	else
+		printf("时风时风，路路畅通\n");
+	return 0;
+}
