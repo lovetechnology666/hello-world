@@ -1,0 +1,18 @@
+#define  _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+int main()
+{
+	int s = 0, a=0, n=0, b;
+	printf("请输入a和n\n");
+	scanf("%d %d",&a,&n);
+	b = a;
+	while (n > 0)
+	{
+		s += b;
+		a = a * 10;
+		b += a;
+		n--;
+	}
+	printf("a+aa+aaa...=%d\n", s);
+	return 0;
+}
