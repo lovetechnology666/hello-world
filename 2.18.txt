@@ -1,0 +1,14 @@
+#include <stdio.h>
+int test()
+{
+	int x = 10;
+	int y = 20;
+	if (1)
+		return x;
+	return y;
+}
+int main()
+{
+	printf("%d\n", test());
+	return 0;
+}
