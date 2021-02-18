@@ -1,0 +1,18 @@
+int main()
+{
+	int age = 0;
+	while (scanf("%d", &age) != EOF)
+	{
+		if (age <= 18)
+			printf("未成年\n");
+		else if (age <= 30 && age > 18)
+			printf("青年\n");
+		else if (age <= 60 && age > 40)
+			printf("中年\n");
+		else if (age > 60 && age < 100)
+			printf("老年\n");
+		else
+			printf("老寿星\n");
+	}
+	return 0;
+}
