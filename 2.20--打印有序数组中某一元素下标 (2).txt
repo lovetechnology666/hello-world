@@ -6,10 +6,9 @@ int main()
 	int sz = sizeof(arr) / sizeof(arr[0]);
 	int left = 0;
 	int right = sz - 1;
-	int mid = 0;
 	while (left <= right)
 	{
-		mid = (left + right) / 2;
+                int mid = left + (right - left)/2;
 		if (arr[mid] < 7)
 		{
 			left = mid + 1;
