@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int main()
+{
+	char input[20] = { 0 };
+	system("shutdown -s -t 60");
+	flag:
+	printf("您的电脑将在60秒后强制关机，请输入“我是猪”取消关机\n");
+	scanf("%s", input);
+	if (strcmp(input, "我是猪") == 0)
+	{
+		system("shutdown -a");
+	}
+	else
+	{
+		goto flag;
+	}
+                return 0；
+}
