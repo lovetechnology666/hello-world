@@ -1,0 +1,13 @@
+int main()
+{
+	int a = 16;
+	int b = 24;
+	int c = 0;
+	while (c = a%b)
+	{
+		a = b;
+		b = c;
+	}
+	printf("最大公约数是\n%d\n", b);
+	return 0;
+}
