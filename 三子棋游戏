@@ -1,0 +1,219 @@
+game.h
+#include <stdlib.h>
+#include <time.h>
+#define ROW 3
+#define COL 3
+void Setmine(char mine[ROW][COL], int row, int col);
+void Printmine(char mine[ROW][COL], int row, int col);
+void Computer(char mine[ROW][COL], int row, int col);
+Judge(char mine[ROW][COL], int x, int y, char ret);
+
+
+game.c
+#define  _CRT_SECURE_NO_WARNINGS
+#include "game.h"
+#include <stdio.h>
+void Setmine(char mine[ROW][COL], int row, int col)
+{
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < row; i++)
+	{
+		for (j = 0; j < col; j++)
+		{
+			mine[i][j] = ' ';
+		}
+	}
+}
+
+
+void Printmine(char mine[ROW][COL], int row, int col)
+{
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < row; i++)
+	{
+		for (j = 0; j < col; j++)
+		{
+			if (j < col - 1)
+			{
+				printf("%c |", mine[i][j]);
+			}
+			else
+			{
+				printf("%c ", mine[i][j]);
+			}
+		}
+		printf("\n");	
+		if (i < row - 1)
+		{
+			printf("- - - - \n");
+		}
+
+	}
+}
+
+void Computer(char mine[ROW][COL], int row, int col)
+{
+	int win = 0;
+	int sum = 0;
+	while (win<row*col)
+	{
+		int m = 0;
+		int n = 0;
+		printf("请输入坐标！！！\n");
+		scanf("%d%d", &m, &n);
+		if (m > 0 && m<=row && n>0 && n <= col)
+		{
+			if (mine[m - 1][n - 1] == ' ')
+			{
+				mine[m - 1][n - 1] = '*';
+				win++;
+				if (Judge(mine, row, col,'*'))
+				{
+					printf("游戏结果:\n恭喜你赢了\n");
+					break;
+				}
+			}
+			else
+			{
+				printf("该方格有数字，请重新输入!!!\n");
+				continue;
+			}
+		}
+		else
+		{
+			printf("输入有误，请重新输入!!!\n");
+			continue;
+		}
+		while (win<row*col)
+		{
+			int x = rand() % row + 1;
+			int y = rand() % col + 1;
+			if (mine[x-1][y-1] == ' ')
+			{
+				mine[x-1][y-1] = '+';
+				win++;
+				if (Judge(mine, row, col, '+'))
+				{
+					printf("游戏结果:\n机器胜利\n");
+					sum = 1;
+				}
+				break;
+			}
+		}
+		if (sum == 1)
+		{
+			break;
+		}
+		if (win == row*col)
+		{
+			printf("游戏结果:\n平局!!!\n");
+			break;
+		}
+
+		Printmine(mine, row, col);
+	}
+}
+
+
+Judge(char mine[ROW][COL], int x, int y, char ret)
+{
+	if (mine[1][1] == ret)
+	{
+		if ((mine[0][0] == ret)&&(mine[2][2] == ret) ||
+			(mine[0][2] == ret)&&(mine[2][0] == ret) || 
+			(mine[0][1] == ret)&&(mine[2][1] == ret) || 
+			(mine[1][0] == ret)&&(mine[1][2] == ret))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	else if (mine[0][0] == ret)
+	{
+		if ((mine[1][0] == ret)&&(mine[2][0] == ret) ||
+			(mine[0][1] == ret)&&(mine[0][2] == ret))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	else if (mine[2][2] == ret)
+	{
+		if ((mine[2][0] == ret)&&(mine[2][1] == ret) ||
+			(mine[0][2] == ret)&&(mine[1][2] == ret))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	else
+	{
+		return 0;
+	}
+
+}
+
+
+
+test.c
+#define  _CRT_SECURE_NO_WARNINGS
+#include "game.h"
+#include <stdio.h>
+void menu()
+{
+	printf("**********************\n");
+	printf("****** 1. play  ******\n");
+	printf("****** 0. delete *****\n");
+	printf("**********************\n");
+}
+void game()
+{
+	char mine[ROW][COL];
+	Setmine(mine, ROW, COL);
+	Printmine(mine, ROW, COL);
+	srand((unsigned int)(time(NULL)));
+	Computer(mine, ROW, COL);
+	Printmine(mine, ROW, COL);
+}
+
+int main()
+{
+	int input = 0;
+	do
+	{
+		menu();
+		scanf("%d", &input);
+		switch (input)
+		{
+		case 1:
+			game();
+			break;
+		case 0:
+			printf("退出游戏\n");
+			break;
+		default:
+			printf("请重新选择\n");
+			break;
+		}
+	} while (input);
+	return 0;
+}
+
+
+
+
+
+
+
+
